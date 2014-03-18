@@ -2,7 +2,29 @@
 
 include "settings.php";
 
-	handdleSession();
+	$categoria = get('c');
+	$where = '';
+	$titulo = "Catálogo";
+	$slogan = "Aquí tienes todo el catálogo de Distribook. Puedes filtrar por categorías.";
+
+	if($categoria && $categoria != '')
+	{
+		$where = array('categoria' => $categoria);
+		$titulo = $categoria;
+		$slogan = "Todos los libros relacionados con " .$titulo;
+	}
+
+	$novedades = $DB->Select(TABLA_LIBROS, $where, 'id DESC', 6);
+
+	if($DB->records == 1)
+	{
+		$novedades = array($novedades);
+	}
+	elseif ($DB->records == 0) {
+		$titulo = "No existe la categoría " . $categoria;
+		$slogan = "Intenta seleccionar una de las categorías bajo el link de catálogo";
+	}
+
 
 ?><!DOCTYPE HTML>
 <!--
@@ -12,7 +34,7 @@ include "settings.php";
 -->
 <html>
 	<head>
-		<title>Distribook</title>
+		<title><?=$titulo?> - Distribook</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -29,33 +51,17 @@ include "settings.php";
 			<link rel="stylesheet" href="css/style-n1.css" />
 		</noscript>
 	</head>
-	<body class="homepage">
+	<body class="no-sidebar">
 
 		<!-- Header Wrapper -->
 			<div id="header-wrapper">
 						
 				<!-- Header -->
-<?php
-
-printHeader($DB);
-
+<?
+	printHeader($DB);
 ?>
 
-				<!-- Hero -->
-					<section id="hero" class="container">
-						<header>
-							<h2>Tu biblioteca médica<br />
-							</h2>
-						</header>
-						<p>La plataforma en donde encuentras toda tu librería médica al alcance de un click.</p>
-						<ul class="actions">
-							<li><a href="registrarme.php" class="button">¡Registrarme!</a></li>
-						</ul>
-					</section>
-
 			</div>
-
-
 
 			
 		<!-- Features 2 -->
@@ -63,8 +69,8 @@ printHeader($DB);
 			
 				<section class="container">
 					<header class="major">
-						<h2 id="novedades">Las últimas novedades</h2>
-						<span>Estos son los últimos titulos en llegar a la librería</span>
+						<h2 id="novedades"><?=$titulo?></h2>
+						<span><?=$slogan?></span>
 					</header>
 
 
@@ -72,11 +78,7 @@ printHeader($DB);
 
 
 <?php
-	$novedades = $DB->Select(TABLA_LIBROS, '', 'id DESC', 6);
-	if(count($novedades) == 1)
-	{
-		$novedades = array($novedades);
-	}
+
 
 	for ($i = 0; $i < count($novedades); $i++) {
 		$libro = $novedades[$i];
@@ -96,42 +98,26 @@ printHeader($DB);
 								<a href="libro.php?l=<?=$libro['url']?>"><h3><?=$libro['nombre']?></h3></a>
 								<span><?=$libro['autor']?></span>
 							</header>
-							<p><?=mb_substr($libro['descripcion'], 0, 150)?> ...</p>
+							<p><?=mb_substr($libro['descripcion'], 0, 100)?></p>
 						</section>
 <?
 	}
 
 ?>
 
-
-
 					</div>
 
-
-					<ul class="actions major">
-						<li><a href="catalogo.php" class="button">Ver la librería completa</a></li>
-					</ul>
 				</section>
 			
 			</div>
 
-
-			
-		<!-- Promo -->
-			<div id="promo-wrapper">
-			
-				<section id="promo">
-					<h2>Ahorra <b>$20</b> con la suscripción anual</h2>
-					<a href="registrarme.php" class="button">Comienza Ahora</a>
-				</section>
-			
-			</div>
 
 		<!-- Footer Wrapper -->
-
 <?php
 	printFooter();
 ?>
+
+
 
 	</body>
 </html>

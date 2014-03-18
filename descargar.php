@@ -1,9 +1,8 @@
 <?php
 include "settings.php";
-    // if (!isset($_SESSION['authenticated']))
-    // {
-    //     exit;
-    // }
+
+    handdleSession(true);
+
     $url = get('l');
     if($url == "" or !$url)
         die('No se indicó un libro valido');

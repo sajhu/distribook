@@ -80,72 +80,16 @@ include "settings.php";
 			
 				<section id="promo">
 					<h2>Ahorra <b>$20</b> con la suscripción anual</h2>
-					<a href="registrarme.html" class="button">Comienza Ahora</a>
+					<a href="registrarme.php" class="button">Comienza Ahora</a>
 				</section>
 			
 			</div>	
 
 		<!-- Footer Wrapper -->
-			<div id="footer-wrapper">
+<?php
+	printFooter();
+?>
 
-				<!-- Footer -->
-					<div id="footer" class="container">
-						<header class="major">
-							<h2 id="contactanos">Respondemos todas tus preguntas	</h2>
-							<span>En Distribook estamos disponibles para ayudarte a conseguir la información que necesites, incluso de la mano de los autores.</span>
-						</header>
-						<div class="row">
-							<section class="6u">
-								<form method="post" action="#">
-									<div class="row half">
-										<div class="6u">
-											<input name="name" placeholder="Nombre" type="text" class="text" required />
-										</div>
-										<div class="6u">
-											<input name="email" placeholder="Correo" type="email" class="text" required />
-										</div>
-									</div>
-									<div class="row half">
-										<div class="12u">
-											<textarea name="message" placeholder="Mensaje"></textarea>
-										</div>
-									</div>
-									<div class="row half">
-										<div class="12u">
-											<ul class="actions">
-												<li><input type="submit" class="button" value="Enviar"></li>
-												<li><a href="#" class="button">Volver a empezar</a></li>
-											</ul>
-										</div>
-									</div>
-								</form>
-							</section>
-							<section class="6u">
-								<div class="row no-collapse-1">
-									<ul class="divided icons 6u">
-										<li class="fa fa-twitter"><a href="#"><span class="extra">twitter.com/</span>untitled</a></li>
-										<li class="fa fa-facebook"><a href="#"><span class="extra">facebook.com/</span>untitled</a></li>
-										<li class="fa fa-dribbble"><a href="#"><span class="extra">dribbble.com/</span>untitled</a></li>
-									</ul>
-									<ul class="divided icons 6u">
-										<li class="fa fa-linkedin"><a href="#"><span class="extra">linkedin.com/</span>untitled</a></li>
-										<li class="fa fa-youtube"><a href="#"><span class="extra">youtube.com/</span>untitled</a></li>
-										<li class="fa fa-pinterest"><a href="#"><span class="extra">pinterest.com/</span>untitled</a></li>
-									</ul>
-								</div>
-							</section>
-						</div>
-					</div>
-
-				<!-- Copyright -->
-					<div id="copyright" class="container">
-						<ul class="menu">
-							<li>&copy; Distribook. Todos los derechos reservados	.</li>
-							<li>Desarrollado por: <a href="http://santiagorojas.co/">Santiago Rojas</a></li>
-						</ul>
-					</div>
-
-			</div>
 
 	</body>
 </html>

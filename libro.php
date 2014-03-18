@@ -1,6 +1,7 @@
 <?php
 include "settings.php";
 
+	handdleSession();
 
 	$l = get('l');
 	$where = '';	
@@ -16,8 +17,11 @@ include "settings.php";
 	$voto = post('votar');
 	if($voto  && $voto != "" && is_numeric($voto))
 	{
+		$libro = $DB->Select(TABLA_LIBROS, $where, '', 1) or die($DB->lastError);
+		$id = $libro['id'];
+
 		$sql = "UPDATE`pubs` SET  `votos` =  `votos` +1, `suma` =  `suma` + {$voto}
-		WHERE  `id` =  '1' ";
+		WHERE  `id` =  '{$id}' ";
 		$DB->ExecuteSQL($sql) or die($DB->lastError);
 	}
 
@@ -87,7 +91,7 @@ include "settings.php";
 
 										<ul class="actions"	>
 											<li><a href="<?=READER_URL.$url?>" class="button">Ver Online</a></li>
-											<li><a href="<?=DOWNLOAD_URL.$url?>" class="button">Descargar</a></li>
+											<li><a href="<?=DOWNLOAD_URL.$url?>" class="button">Bajar (<b>$5</b>)</a></li>
 										</ul>
 									</section>
 
@@ -129,7 +133,7 @@ include "settings.php";
 ?>
 										<p><?=$votos?> personas la han calificado en <b><?=$rating?></b></p>
 
-										<form action="<?=ACTUAL_URL?>?l=<?=$url?>" method="post">
+										<form action="<?=ACTUAL_URL?>" method="post">
 
 											<div align="center">
 
@@ -189,20 +193,9 @@ include "settings.php";
 			</div>
 
 		<!-- Footer Wrapper -->
-			<div id="footer-wrapper">
-
-				<!-- Footer -->
-					
-
-				<!-- Copyright -->
-					<div id="copyright" class="container">
-						<ul class="menu">
-							<li>&copy; Untitled. All rights reserved.</li>
-							<li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
-						</ul>
-					</div>
-
-			</div>
+<?php
+	printFooter();
+?>
 
 	</body>
 </html>
