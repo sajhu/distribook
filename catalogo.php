@@ -98,7 +98,7 @@ include "settings.php";
 								<a href="libro.php?l=<?=$libro['url']?>"><h3><?=$libro['nombre']?></h3></a>
 								<span><?=$libro['autor']?></span>
 							</header>
-							<p><?=mb_substr($libro['descripcion'], 0, 100)?></p>
+							<p><?=mb_substr($libro['descripcion'], 0, 100)?>...</p>
 						</section>
 <?
 	}
